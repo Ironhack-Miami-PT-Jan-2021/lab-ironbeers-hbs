@@ -1,3 +1,54 @@
 
 
-{{> beerCard theBeer }}
+<div class="left">
+
+
+    {{> beerCard theBeer }}
+
+
+    {{#if abv}}
+      <h4>Alcohol Content: {{theBeer.abv}}% by volume</h4>
+    {{/if}}
+
+    {{#if ibu}}
+      <h4>Bitterness: {{theBeer.ibu}} IBUs</h4>
+    {{/if}}
+
+    {{#if ph}}
+      <h4>Acidity: {{theBeer.ph}}pH</h4>
+    {{/if}}
+
+    {{#if srm}}
+      <h4>Opacity: {{theBeer.srm}}srm</h4>
+    {{/if}}
+
+    {{#if ebc}}
+      <h4>Color: {{theBeer.ebc}}ebc</h4>
+    {{/if}}
+
+</div>
+
+
+<div class="right">
+
+  <form class="push" action="/one-single-beer/{{theBeer.id}}" method="get">
+    <!-- the name and value in the form inputs is important because  -->
+    <!-- these are going to create the params  -->
+    <!-- if the form is a get form, we will be creating query params -->
+    <!-- if the form is  post form, we will create URL params -->
+
+    <label>Abv</label>
+    <input type="checkbox" name="abv" value="true">
+    <label>IBUs</label>
+    <input type="checkbox" name="ibu" value="true">
+    <label>Opacity</label>
+    <input type="checkbox" name="srm" value="true">
+    <label>Color</label>
+    <input type="checkbox" name="ebc" value="true">
+    <label>Acidity</label>
+    <input type="checkbox" name="ph" value="true">
+
+    <button type="submit">Submit</button>
+  </form>
+
+</div>

@@ -48,10 +48,31 @@ app.get('/random', (req, res) => {
 
 
 app.get('/one-single-beer/:beerIdVariable', (req, res) => {
+  // this is a url parameter ^
+  // this url is /one-single-beer/anything
+  // as long as there is something after the /one-single-beer this route will take
+  // value in the url and equal it to req.params.whatever-comes-after-the-colon
+
   punkAPI
   .getBeer(req.params.beerIdVariable)
   .then(responseFromAPI => {
-    res.render('single-beer', {theBeer: responseFromAPI[0]});
+    let data = {
+     abv : false,
+     ibu : false,
+     ph : false,
+     ebc : false,
+     srm : false,
+     theBeer: responseFromAPI[0]
+   }
+    console.log(req.query);
+    
+    if(req.query.abv) data.abv = true;
+    if(req.query.ibu) data.ibu = true;
+    if(req.query.ph) data.ph = true;
+    if(req.query.ebc) data.ebc = true;
+    if(req.query.srm) data.srm = true;
+
+    res.render('single-beer', data);
   })
   .catch(error => console.log(error));
 });
